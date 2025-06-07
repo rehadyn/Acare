@@ -1,43 +1,48 @@
 # AkademikCare
 
-AkademikCare merupakan aplikasi pengaduan akademik sederhana berbasis PHP.
-Aplikasi ini memungkinkan mahasiswa membuat laporan masalah terkait proses akademik
-serta memudahkan admin memantau dan memberi solusi atas laporan tersebut.
+AkademikCare adalah aplikasi pengaduan akademik sederhana yang ditulis dengan PHP. Proyek ini memungkinkan mahasiswa menyampaikan keluhan terkait kegiatan akademik dan membantu admin mencatat serta menindaklanjuti laporan tersebut.
 
-## Fitur
+## Fitur Utama
 
-- **Halaman Home** menampilkan daftar laporan yang telah masuk.
-- **Formulir Laporan** untuk mahasiswa membuat laporan baru dan mengunggah berkas pendukung.
-- **Halaman Admin** untuk melihat detail laporan, memperbarui status, serta menambahkan solusi.
-- **Autentikasi Admin** melalui halaman login sederhana.
+- **Formulir Laporan** – Mahasiswa dapat membuat laporan baru beserta unggahan berkas pendukung.
+- **Daftar Laporan** – Menampilkan laporan yang masuk berikut statusnya.
+- **Halaman Admin** – Admin dapat memperbarui status laporan dan menuliskan solusi.
+- **Autentikasi** – Halaman login sederhana untuk akses admin.
+- **Proteksi CSRF** – Token CSRF dibangkitkan pada setiap sesi dan diverifikasi ketika melakukan aksi.
 
 ## Struktur Direktori
 
-- `index.php` – Router utama yang memuat halaman sesuai parameter `page`.
-- `layout.php` dan `navbar.php` – Menyediakan tampilan dasar dan navigasi.
-- `pages/` – Berisi beragam halaman seperti `home.php`, `daftar.php`, `admin.php`, dan lainnya.
-- `uploads/` – Tempat penyimpanan berkas yang diunggah pengguna.
+- `index.php` – Router utama yang menentukan halaman mana yang dimuat.
+- `layout.php` dan `navbar.php` – Komponen tampilan dasar dan navigasi.
+- `csrf.php` – Fungsi pembangkit dan pengecek token CSRF.
+- `pages/` – Berisi implementasi halaman:
+  - `home.php` – Daftar laporan terbaru.
+  - `daftar.php` – Formulir pengaduan.
+  - `add.php` – Proses penyimpanan laporan.
+  - `admin.php` – Panel admin.
+  - `login.php` – Autentikasi admin.
+  - `update_status.php` dan `update_solusi.php` – Endpoint AJAX untuk memperbarui laporan.
+  - `koneksi.php` – Koneksi basis data untuk direktori ini.
+- `uploads/` – Lokasi penyimpanan berkas yang diunggah pengguna.
+- `tests/` – Unit test sederhana menggunakan PHPUnit.
 
-## Persiapan
+## Cara Menjalankan
 
-1. Siapkan server web dengan PHP dan MySQL.
-2. Buat database dan sesuaikan kredensial pada `koneksi.php` (baik di direktori
-   utama maupun di dalam `pages/`).
-3. Import struktur tabel yang diperlukan (misalnya tabel `laporan` dan `users`).
-4. Jalankan aplikasi melalui browser dengan membuka `index.php`.
-
-## Catatan Keamanan
-
-File `koneksi.php` berisi contoh kredensial bawaan. Pastikan mengganti
-kredensial tersebut pada lingkungan produksi dan lindungi file dari akses
-publik.
+1. Pastikan PHP dan MySQL telah terpasang di server.
+2. Buat database baru kemudian sesuaikan konfigurasi pada `koneksi.php` (baik di direktori utama maupun `pages/`).
+3. Import skema tabel yang diperlukan (tabel `laporan` dan `users`).
+4. Jalankan server web dan akses `index.php` melalui browser.
+5. Login sebagai admin melalui halaman `index.php?page=login` untuk mengelola laporan.
 
 ## Pengujian
 
-Proyek ini menyiapkan kerangka `PHPUnit` dasar. Jalankan perintah berikut setelah
-melakukan `composer install` untuk menjalankan test:
+Setelah menjalankan `composer install`, tes unit dapat dijalankan dengan:
 
 ```bash
 vendor/bin/phpunit
 ```
+
+## Catatan Keamanan
+
+Contoh kredensial database pada `koneksi.php` hanya untuk kebutuhan pengembangan. Gantilah informasi tersebut pada lingkungan produksi dan pastikan file koneksi tidak dapat diunduh publik.
 
