@@ -51,7 +51,7 @@ $res = mysqli_query($conn, $sql);
 ?>
 <h1>Selamat Datang di AkademikCare</h1>
 <p>AkademikCare adalah platform pengaduan akademik yang dirancang untuk membantu mahasiswa, dalam menyampaikan keluhan terkait proses akademik. Dengan fitur yang inovatif, AkademikCare menawarkan solusi cepat dan transparan untuk berbagai permasalahan, </p>
-<!-- tombol buat kaporan -->
+<!-- tombol buat laporan -->
 <a href="index.php?page=addlpr" class="btn btn-primary">Buat Laporan</a>
 <P></P>
 <div class="table-responsive">
