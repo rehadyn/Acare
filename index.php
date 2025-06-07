@@ -46,8 +46,6 @@ switch ($page) {
     include 'pages/update_status.php';
     break;
 
-    // (Opsional) case 'login': include 'pages/login.php'; break;
-
   default:
     // Halaman tidak dikenali => 404
     echo "<h2>Halaman tidak ditemukan!</h2>";
