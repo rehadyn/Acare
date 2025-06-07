@@ -1,6 +1,7 @@
 <?php
 // pages/home.php
 include 'koneksi.php';
+session_start();
 
 // Jika ada parameter ?status, kita tampilkan SweetAlert
 if (isset($_GET['status'])) {

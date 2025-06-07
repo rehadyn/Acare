@@ -1,6 +1,6 @@
 <?php
-session_start();
 include 'koneksi.php';
+session_start();
 
 // Jika user sudah login, arahkan ke halaman admin
 if (isset($_SESSION['user_id'])) {
