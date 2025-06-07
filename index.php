@@ -3,6 +3,8 @@
 
 // Mulai session di awal sebelum include file lain
 session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 
 
 include 'layout.php';

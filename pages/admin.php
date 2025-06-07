@@ -1,6 +1,8 @@
 <?php
 include 'koneksi.php';
 session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 
 // Periksa apakah pengguna sudah login
 if (!isset($_SESSION['user_id'])) {

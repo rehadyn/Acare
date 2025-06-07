@@ -1,6 +1,8 @@
 <?php
 include 'koneksi.php';
 session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 
 header('Content-Type: application/json');
 

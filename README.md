@@ -32,3 +32,12 @@ File `koneksi.php` berisi contoh kredensial bawaan. Pastikan mengganti
 kredensial tersebut pada lingkungan produksi dan lindungi file dari akses
 publik.
 
+## Pengujian
+
+Proyek ini menyiapkan kerangka `PHPUnit` dasar. Jalankan perintah berikut setelah
+melakukan `composer install` untuk menjalankan test:
+
+```bash
+vendor/bin/phpunit
+```
+

@@ -1,9 +1,11 @@
 <?php
 include 'koneksi.php';
 session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_SESSION['csrf_token']) || !isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
         echo json_encode(["success" => false, "error" => "Invalid CSRF token"]);
         exit;
     }

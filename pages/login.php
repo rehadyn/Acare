@@ -1,6 +1,8 @@
 <?php
 include 'koneksi.php';
 session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 
 // Jika user sudah login, arahkan ke halaman admin
 if (isset($_SESSION['user_id'])) {
@@ -10,8 +12,11 @@ if (isset($_SESSION['user_id'])) {
 
 // Proses login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = $_POST['password']; // Password dalam format plain text
+    if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+        $error = "Invalid CSRF token";
+    } else {
+        $username = mysqli_real_escape_string($conn, $_POST['username']);
+        $password = $_POST['password']; // Password dalam format plain text
 
     // Query untuk mendapatkan data user
     $query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
@@ -35,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Username tidak ditemukan!";
     }
+    }
 }
 
 
@@ -55,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php endif; ?>
 
                         <form method="POST" action="">
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" name="username" id="username" class="form-control" required>
