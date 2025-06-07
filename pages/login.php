@@ -21,10 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = mysqli_fetch_assoc($result);
         
         // Verifikasi password tanpa hashing
-        if ($password === $user['password']) {  
+        if ($password === $user['password']) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-          
+            // Generate CSRF token setelah login berhasil
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
             // Redirect ke halaman admin yang benar
             header("Location: index.php?page=admin");

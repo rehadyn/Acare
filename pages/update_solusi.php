@@ -1,5 +1,11 @@
 <?php
+session_start();
 include 'koneksi.php';
+
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
+    echo json_encode(["success" => false, "error" => "Invalid CSRF token"]);
+    exit;
+}
 
 if (isset($_POST['id']) && isset($_POST['solusi'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
