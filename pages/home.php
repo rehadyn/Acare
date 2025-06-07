@@ -2,6 +2,8 @@
 // pages/home.php
 include 'koneksi.php';
 session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 
 // Jika ada parameter ?status, kita tampilkan SweetAlert
 if (isset($_GET['status'])) {

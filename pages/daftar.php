@@ -1,10 +1,14 @@
 <?php
 // pages/daftar.php
+session_start();
+require_once 'csrf.php';
+ensure_csrf_token();
 ?>
 <h1>Buat Laporan</h1>
 <p>Isi form berikut untuk melaporkan permasalahan. Segala informasi pribadi seperti nama, NIM, dan kelas akan dirahasiakan.</p>
 
 <form action="index.php?page=addlpr" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
   <div class="form-group">
     <label for="nama">Nama</label>
     <input 
