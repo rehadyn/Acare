@@ -1,7 +1,6 @@
 <?php
-session_start();
-
 include 'koneksi.php';
+session_start();
 
 // Periksa apakah pengguna sudah login
 if (!isset($_SESSION['user_id'])) {
